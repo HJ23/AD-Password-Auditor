@@ -62,6 +62,14 @@ class PasswordGenerator:
         if(self.domain!=""):
             name_combination.add(self.domain)
             name_combination.add(self.domain+"\\"+self.username)
+        if("." in self.username):
+            name,surname=self.username.split(".")[0],self.username.split(".")[1]
+            name_combination.add(name)
+            name_combination.add(surname)
+            name_combination.add(name[0].upper()+name[1:].lower())
+            name_combination.add(surname[0].upper()+surname[1:].lower())
+            name_combination.add(name+surname)
+            name_combination.add(name[0].upper()+name[1:]+surname[0].upper()+surname[1:].lower())
         return self.__combiner(name_combination)
 
 class Hasher(object):
